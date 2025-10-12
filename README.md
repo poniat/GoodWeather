@@ -69,8 +69,9 @@ app.Use(async (context, next) =>
 5. Open browser, navigate to http://localhost:8080/api/weather
 
 ## GitHub Actions (CI/CD)
-1. Create `.github/workflows/build.yml`
-2. With content as below:
+1. Link to GitHub Actions: https://github.com/poniat/GoodWeather/actions
+2. Create `.github/workflows/build.yml`
+3. With content as below:
 ```
 name: Build and Test GoodWeather
 
@@ -106,6 +107,7 @@ jobs:
         run: docker build -t goodweather:latest .
 ```
 ## Docker Hub
+Link to image in Docker Hub repository: https://hub.docker.com/repository/docker/poniat81/goodweather/general
 1. Create Docker Hub account at https://hub.docker.com/ with your unique Docker ID
 2. Build a Docker image locally
 ```
