@@ -1,0 +1,16 @@
+public class WeatherTests
+{
+    [Fact]
+    public void Foo()
+    {
+        var weatherForecast = new WeatherForecast();
+        Assert.NotNull(weatherForecast);
+    }
+
+    [Fact]
+    public void FailMeTest()
+    {
+        var weatherForecast = new WeatherForecast();
+        Assert.Equal(0, 1);
+    }
+}

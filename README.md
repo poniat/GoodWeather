@@ -61,6 +61,12 @@ Create Unit test project
 dotnet new xunit -n GoodWeather.Tests
 dotnet add GoodWeather.Tests reference GoodWeather
 ```
+Add xUnit references
+```
+dotnet add GoodWeather.Tests package Microsoft.NET.Test.Sdk
+dotnet add GoodWeather.Tests package xunit
+dotnet add GoodWeather.Tests package xunit.runner.visualstudio
+```
 
 ### Persistance, DbContext, Entify Framework, EF migrations
 Add Entity Framework Core (SQLite) libraries
