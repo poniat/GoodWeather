@@ -55,6 +55,40 @@ app.Use(async (context, next) =>
 });
 ```
 
+### Unit tests
+Create Unit test project
+```
+dotnet new xunit -n GoodWeather.Tests
+dotnet add GoodWeather.Tests reference GoodWeather
+```
+
+### Persistance, DbContext, Entify Framework, EF migrations
+Add Entity Framework Core (SQLite) libraries
+```
+dotnet add package Microsoft.EntityFrameworkCore
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+dotnet add package Microsoft.EntityFrameworkCore.Tools
+```
+
+Create your DbContext
+```C#
+public class WeatherDbContext : DbContext
+{
+    public WeatherDbContext(DbContextOptions<WeatherDbContext> options) : base(options) { }
+    public DbSet<WeatherForecast> Services => Set<WeatherForecast>();
+}
+```
+Register DbContext
+```C#
+builder.Services.AddDbContext<WeatherDbContext>(options => options.UseSqlite("Data Source=good-weather.db"));
+```
+Create your model and repository classes. After initial setup, create database and 1st migration
+```
+dotnet ef migrations add Init
+dotnet ef database update
+```
+
+
 ## Docker
 1. Create `dockerfile`
 2. Start `Docker desktop` on Windows.

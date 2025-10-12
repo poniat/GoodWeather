@@ -1,5 +1,8 @@
+using GoodWeather;
 using GoodWeather.Middlewere;
+using GoodWeather.Repositories;
 using GoodWeather.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,8 +11,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddControllers();
+
+// services
 builder.Services.AddSingleton<IEmailSender, EmailSender>();
+
+// data
+builder.Services.AddScoped<IWeatherForecastRepository, WeatherForecastRepository>();
+builder.Services.AddDbContext<WeatherDbContext>(options => options.UseSqlite("Data Source=good-weather.db"));
 
 var app = builder.Build();
 
@@ -34,7 +44,6 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 // });
 
 app.UseHttpsRedirection();
-
 
 app.MapControllers();
 
