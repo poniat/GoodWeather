@@ -68,5 +68,61 @@ app.Use(async (context, next) =>
     ```
 5. Open browser, navigate to http://localhost:8080/api/weather
 
+## GitHub Actions (CI/CD)
+1. Create `.github/workflows/build.yml`
+2. With content as below:
+```
+name: Build and Test GoodWeather
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build project
+        run: dotnet build --no-restore --configuration Release
+
+      - name: Run tests
+        run: dotnet test --no-build --verbosity normal
+
+      - name: Build Docker image
+        run: docker build -t goodweather:latest .
+```
+## Docker Hub
+1. Create Docker Hub account at https://hub.docker.com/ with your unique Docker ID
+2. Build a Docker image locally
+```
+docker build -t goodweather .
+```
+3. Tag the image with your Docker Hub username
+```
+docker tag goodweather:latest poniat81/goodweather:latest
+```
+4. Push the image to Docker Hub
+```
+docker push poniat81/goodweather:latest
+```
+5. Other can pull your image
+```
+docker pull poniat81/goodweather:latest
+```
+
 
 
