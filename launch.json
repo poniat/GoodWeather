@@ -1,0 +1,30 @@
+{
+  "configurations": [
+    {
+      "type": "coreclr",
+      "request": "launch",
+      "name": "Launch ASP.NET Core (GoodWeather)",
+      "program": "${workspaceFolder}/bin/Debug/net9.0/${input:executableName}.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "type": "pickString",
+      "id": "executableName",
+      "description": "Select the DLL to debug",
+      "options": [
+        "GoodWeather"
+      ]
+    }
+  ]
+}
