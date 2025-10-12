@@ -1,5 +1,3 @@
-using System.Threading.Tasks;
-
 namespace GoodWeather.Middlewere
 {
     public class CustomHeaderMiddleware
