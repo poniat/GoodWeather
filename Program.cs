@@ -23,6 +23,13 @@ builder.Services.AddDbContext<WeatherDbContext>(options => options.UseSqlite("Da
 
 var app = builder.Build();
 
+// automatic migration
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<WeatherDbContext>();
+    db.Database.Migrate();
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
