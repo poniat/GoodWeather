@@ -1,3 +1,4 @@
+using GoodWeather.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace GoodWeather

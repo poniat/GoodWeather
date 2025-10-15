@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+using GoodWeather.Models;
 
 namespace GoodWeather.Repositories
 {

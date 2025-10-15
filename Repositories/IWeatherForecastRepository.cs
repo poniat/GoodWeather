@@ -1,3 +1,5 @@
+using GoodWeather.Models;
+
 namespace GoodWeather.Repositories
 {
     public interface IWeatherForecastRepository

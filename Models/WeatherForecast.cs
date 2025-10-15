@@ -1,6 +1,9 @@
-public class WeatherForecast
+namespace GoodWeather.Models
 {
-    public int Id { get; set; }
-    public double TemperatureInCelsius { get; set; }
-    public string City { get; set; } = string.Empty;
+    public class WeatherForecast
+    {
+        public int Id { get; set; }
+        public double TemperatureInCelsius { get; set; }
+        public string City { get; set; } = string.Empty;
+    }
 }

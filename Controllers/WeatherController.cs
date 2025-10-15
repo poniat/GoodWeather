@@ -1,4 +1,4 @@
-using System.Security.Cryptography.X509Certificates;
+using GoodWeather.Models;
 using GoodWeather.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
