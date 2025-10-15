@@ -14,9 +14,48 @@ public class WeatherController : ControllerBase
     }
 
     [HttpGet()]
-    public IActionResult Get()
+    public IActionResult Get([FromQuery] int page = 1,
+        [FromQuery] int pageSize = 5,
+        [FromQuery] int? temperatureFrom = null,
+        [FromQuery] int? temperatureTo = null)
     {
-        return Ok(_repository.GetAll());
+        if (page <= 0 || pageSize <= 0)
+        {
+            return BadRequest("Page and PageSize must be greater than 0.");
+        }
+
+        var query = _repository.GetAll().AsQueryable();
+
+        // filtering
+        if (temperatureFrom.HasValue)
+        {
+            query = query.Where(w => w.TemperatureInCelsius >= temperatureFrom.Value);
+        }
+
+        if (temperatureTo.HasValue)
+        {
+            query = query.Where(w => w.TemperatureInCelsius <= temperatureTo.Value);
+        }
+
+        var totalCount = query.Count();
+
+        // paging
+        var items = query
+            .OrderBy(w => w.Id)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+
+        var response = new
+        {
+            totalCount,
+            page,
+            pageSize,
+            totalPages = (int)Math.Ceiling(totalCount / (double)pageSize),
+            items
+        };
+        
+        return Ok(response);
     }
 
     [HttpGet("{city}")]
